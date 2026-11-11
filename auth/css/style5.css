@@ -1,0 +1,416 @@
+/* General Page Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ 
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(circle at 5% 5%, rgba(74, 239, 221, .45) 100%, transparent 32%),
+
+        radial-gradient(circle at 95% 85%, rgba(91, 196, 255, .40) 75%, transparent 35%),
+
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, .95) 0%, transparent 50%);
+      
+    position: relative;
+    min-height: 100vh;
+}
+
+
+
+/* Main Container */
+.Box1 {
+    max-width: 1400px;
+    margin: auto;
+}
+
+.Box1 h2 {
+    text-align: center;
+    color: #0d6efd;
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+/* Form Layout */
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+
+/* Individual Sections */
+.Basic,
+.Contact,
+.Address,
+.Administrator,
+.Password,
+.License {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    width: 45%;
+    min-width: 350px;
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.12);
+    transition: 0.3s ease;
+}
+
+.Basic:hover,
+.Contact:hover,
+.Address:hover,
+.Administrator:hover,
+.Password:hover,
+.License:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 123, 255, 0.2);
+}
+
+.floating-icons {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: -1;
+
+    overflow: hidden;
+
+}
+
+.icon {
+
+    position: absolute;
+
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 34px;
+
+    background: rgba(255, 255, 255, .36);
+
+    backdrop-filter: blur(18px);
+
+    border-radius: 22px;
+
+    box-shadow:
+
+        0 10px 25px rgba(0, 0, 0, .08);
+
+    animation: float 4s ease-in-out infinite;
+
+}
+
+.heart {
+    color: #ff6b81;
+    left: 25px;
+    bottom: 1px;
+}
+
+
+.stethoscope {
+    color: #f7b731;
+    left: 20px;
+    top: 220px;
+}
+
+.pulse {
+    color: #47d7c8;
+    left: 180px;
+    top: 70px;
+}
+
+.hospital {
+    color: #19b5fe;
+    left: 20px;
+    top: 420px;
+}
+
+.user {
+    color: #c445ff;
+    left: 25px;
+    bottom: 170px;
+}
+
+.plus {
+    color: #ff9f43;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+}
+
+.clipboard {
+    color: #2ecc71;
+    right: 60px;
+    top: 20px;
+}
+
+.clock {
+    color: #7d5fff;
+    right: 220px;
+    top: 40px;
+}
+
+.kit {
+    color: #d980fa;
+    right: 70px;
+    bottom: 120px;
+}
+
+.syringe {
+    color: #38ada9;
+    right: 20px;
+    top: 350px;
+}
+
+.capsules {
+    color: #e15f41;
+    right: 500px;
+    top: 35px;
+}
+
+
+.microscope {
+    color: #00ACC1;
+    right: 10px;
+    top: 200px;
+}
+
+
+.eye {
+    color: #42A5F5;
+    left: 300px;
+    top: 80px;
+}
+
+/* Lungs */
+.lungs {
+    color: #EF5350;
+}
+
+/* X-Ray */
+.x-ray {
+    color: #5C6BC0;
+}
+
+/* Prescription Bottle */
+.prescription-bottle-medical {
+    color: #26A69A;
+}
+
+/* Virus */
+.virus {
+    color: #8BC34A;
+}
+
+/* Bandage */
+.bandage {
+    color: #FFB74D;
+}
+
+/* Ambulance */
+.ambulance {
+    color: #E53935;
+}
+
+/* Thermometer */
+.temperature-half {
+    color: #FF7043;
+}
+
+/* Bacteria */
+.bacteria {
+    color: #66BB6A;
+}
+
+
+@keyframes float {
+
+    0% {
+
+        transform: translateY(20px) rotate(0deg);
+
+    }
+
+    50% {
+
+        transform: translateY(-80px) rotate(40deg);
+
+    }
+
+    100% {
+
+        transform: translateY(-0px) rotate(0deg);
+
+    }
+
+}
+
+.heart {
+    animation-duration: 3s;
+}
+
+
+.stethoscope {
+    animation-duration: 4s;
+}
+
+.pulse {
+    animation-duration: 5s;
+}
+
+.hospital {
+    animation-duration: 2s;
+}
+
+.user {
+    animation-duration: 4s;
+}
+
+.plus {
+    animation-duration: 6s;
+    
+}
+
+.clipboard {
+    animation-duration: 3s;
+}
+
+.clock {
+    animation-duration: 1s;
+}
+
+.kit {
+    animation-duration: 1s;
+}
+
+.syringe {
+    animation-duration: 1s;
+}
+
+.capsules {
+    animation-duration: 1s;
+}
+
+.microscope {
+    animation-duration: 1s;
+}
+
+.eye {
+    animation-duration: 1s;
+}
+
+/* Section Titles */
+h3 {
+    color: #0f9d8b;
+    border-left: 5px solid #18c7b4;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+}
+
+/* Inputs */
+.input,
+select,
+input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cfd9e6;
+    border-radius: 10px;
+    background: #f8fbff;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.input:focus,
+select:focus {
+    border-color: #0d6efd;
+    outline: none;
+    background: #ffffff;
+    box-shadow: 0 0 8px rgba(13, 110, 253, 0.2);
+}
+
+/* Address Fields */
+.Address {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.12);
+}
+
+/* Buttons */
+.submit-button {
+    background: linear-gradient(135deg, #0d6efd, #4da6ff);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.submit-button {
+    background: #185FA5;
+    color: white;
+    padding: 11px 32px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.submit-button:hover {
+    background: #0C447C;
+}
+
+/* Submit Button Center */
+.b1:last-child {
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+}
+
+/* License Section Full Width */
+.License {
+    width: 93%;
+}
+
+/* Responsive Design */
+@media(max-width: 900px) {
+
+    .Basic,
+    .Contact,
+    .Address,
+    .Administrator,
+    .Password,
+    .License {
+        width: 100%;
+    }
+
+    .Box1 h2 {
+        font-size: 26px;
+    }
+}
+
+.Password {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 20px rgba(46, 242, 108, 0.501);
+}

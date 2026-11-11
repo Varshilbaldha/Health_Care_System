@@ -1,0 +1,865 @@
+/*==================================================
+    RESET
+==================================================*/
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f7fc;
+
+    color: #172033;
+}
+
+
+/*==================================================
+    MOBILE APP
+==================================================*/
+
+.mobile-app {
+    width: 100%;
+    max-width: 480px;
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    padding-bottom: 90px;
+}
+
+
+/*==================================================
+    HEADER
+==================================================*/
+
+.page-header {
+    padding: 21px 15px 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111936,
+            #6355f4
+        );
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    border-radius:
+        0 0 27px 27px;
+}
+
+
+.back-button {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(255,255,255,0.13);
+
+    color: #ffffff;
+
+    border-radius: 13px;
+
+    text-decoration: none;
+
+    font-size: 23px;
+}
+
+
+.header-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.header-content span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    opacity: 0.7;
+}
+
+
+.header-content h1 {
+    margin: 0;
+
+    font-size: 20px;
+
+    line-height: 1.2;
+}
+
+
+.header-icon {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,0.13);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+
+/*==================================================
+    BOOKING PROGRESS
+==================================================*/
+
+.booking-progress {
+    margin:
+        -3px 13px 18px;
+
+    padding:
+        14px 9px;
+
+    background: #ffffff;
+
+    border-radius: 17px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    box-shadow:
+        0 6px 20px
+        rgba(31,48,85,0.07);
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+.progress-step {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 5px;
+
+    min-width: 45px;
+}
+
+
+.progress-step > div {
+    width: 27px;
+    height: 27px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #edf0f5;
+
+    color: #929aaa;
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+.progress-step span {
+    color: #929aaa;
+
+    font-size: 6px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.progress-step.active > div {
+    background: #6355f4;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 4px 10px
+        rgba(99,85,244,0.25);
+}
+
+
+.progress-step.active span {
+    color: #6355f4;
+}
+
+
+.progress-line {
+    height: 2px;
+
+    flex: 1;
+
+    margin:
+        13px 2px 0;
+
+    background: #e8ebf1;
+
+    min-width: 8px;
+}
+
+
+/*==================================================
+    PAGE
+==================================================*/
+
+.page-container {
+    padding:
+        0 14px;
+}
+
+
+/*==================================================
+    SELECTED HOSPITAL CARD
+==================================================*/
+
+.selected-card {
+    background: #ffffff;
+
+    border-radius: 21px;
+
+    padding: 17px;
+
+    border:
+        1px solid #edf0f5;
+
+    box-shadow:
+        0 7px 23px
+        rgba(31,48,85,0.06);
+
+    margin-bottom: 14px;
+}
+
+
+/*==================================================
+    HEADING
+==================================================*/
+
+.selected-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+
+.hospital-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    background: #eef0ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 24px;
+}
+
+
+.selected-heading span {
+    display: block;
+
+    color: #6355f4;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 4px;
+}
+
+
+.selected-heading h2 {
+    margin: 0;
+
+    font-size: 16px;
+
+    line-height: 1.35;
+
+    word-break: break-word;
+}
+
+
+/*==================================================
+    REGISTERED STATUS
+==================================================*/
+
+.registered-status {
+    margin-top: 14px;
+
+    padding:
+        10px 11px;
+
+    border-radius: 11px;
+
+    background: #ebf9f2;
+
+    color: #18865d;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.status-check {
+    width: 20px;
+    height: 20px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #27a76e;
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 10px;
+}
+
+
+/*==================================================
+    DETAILS
+==================================================*/
+
+.hospital-details {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+
+.detail-box {
+    padding:
+        10px;
+
+    border-radius: 11px;
+
+    background: #f8f9fc;
+}
+
+
+.detail-box span {
+    display: block;
+
+    color: #9aa2b0;
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.6px;
+
+    margin-bottom: 4px;
+}
+
+
+.detail-box strong {
+    display: block;
+
+    color: #3e4759;
+
+    font-size: 9px;
+
+    line-height: 1.4;
+
+    word-break: break-word;
+}
+
+
+/*==================================================
+    ADDRESS
+==================================================*/
+
+.address-box {
+    margin-top: 9px;
+
+    padding: 11px;
+
+    background: #f8f9fc;
+
+    border-radius: 11px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+}
+
+
+.address-icon {
+    font-size: 15px;
+
+    flex-shrink: 0;
+}
+
+
+.address-box > div {
+    min-width: 0;
+}
+
+
+.address-box > div > span {
+    display: block;
+
+    color: #9aa2b0;
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.6px;
+
+    margin-bottom: 4px;
+}
+
+
+.address-box p {
+    margin: 0;
+
+    color: #697286;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/*==================================================
+    PATIENT CODE
+==================================================*/
+
+.patient-code-box {
+    margin-top: 10px;
+
+    padding:
+        11px 12px;
+
+    border-radius: 12px;
+
+    background: #f0efff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.patient-code-box > div {
+    min-width: 0;
+}
+
+
+.patient-code-box span {
+    display: block;
+
+    color: #7168cf;
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 4px;
+}
+
+
+.patient-code-box strong {
+    color: #4f47c5;
+
+    font-size: 11px;
+
+    letter-spacing: 0.6px;
+
+    word-break: break-word;
+}
+
+
+.code-icon {
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    border-radius: 9px;
+
+    background: #dedbff;
+
+    color: #5950ca !important;
+
+    display: flex !important;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 8px !important;
+
+    margin: 0 !important;
+}
+
+
+/*==================================================
+    NEXT CARD
+==================================================*/
+
+.next-card {
+    background: #ffffff;
+
+    border:
+        1px solid #edf0f5;
+
+    border-radius: 19px;
+
+    padding: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(31,48,85,0.05);
+
+    margin-bottom: 12px;
+}
+
+
+.next-icon {
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    background: #eaf7f4;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+
+.next-content {
+    min-width: 0;
+}
+
+
+.next-content > span {
+    display: block;
+
+    color: #159473;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.9px;
+
+    margin-bottom: 4px;
+}
+
+
+.next-content h2 {
+    margin:
+        0 0 4px;
+
+    font-size: 14px;
+}
+
+
+.next-content p {
+    margin: 0;
+
+    color: #8a93a5;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/*==================================================
+    CONTINUE BUTTON
+==================================================*/
+
+.continue-button {
+    width: 100%;
+
+    min-height: 49px;
+
+    padding:
+        0 16px;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6355f4,
+            #5143e8
+        );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    box-shadow:
+        0 7px 18px
+        rgba(99,85,244,0.22);
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+.continue-button strong {
+    font-size: 19px;
+
+    font-weight: 400;
+}
+
+
+/*==================================================
+    CHANGE HOSPITAL
+==================================================*/
+
+.change-button {
+    width: 100%;
+
+    min-height: 43px;
+
+    margin-top: 9px;
+
+    border-radius: 12px;
+
+    border:
+        1px solid #e0e3eb;
+
+    background: #ffffff;
+
+    color: #697286;
+
+    text-decoration: none;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+/*==================================================
+    BOTTOM NAV
+==================================================*/
+
+.bottom-nav {
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 0;
+
+    transform:
+        translateX(-50%);
+
+    width: 100%;
+
+    max-width: 480px;
+
+    height: 70px;
+
+    background: #ffffff;
+
+    border-top:
+        1px solid #e8ebf2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    z-index: 1000;
+
+    box-shadow:
+        0 -5px 20px
+        rgba(31,48,85,0.07);
+}
+
+
+.bottom-nav a {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    color: #8c94a5;
+
+    text-decoration: none;
+
+    font-size: 8px;
+
+    font-weight: 600;
+}
+
+
+.bottom-nav a span {
+    font-size: 17px;
+}
+
+
+.bottom-nav a.active {
+    color: #6355f4;
+}
+
+
+/*==================================================
+    SMALL MOBILE
+==================================================*/
+
+@media (max-width: 360px) {
+
+    .page-header {
+        padding:
+            19px 13px 24px;
+    }
+
+    .header-content h1 {
+        font-size: 18px;
+    }
+
+    .page-container {
+        padding:
+            0 12px;
+    }
+
+    .booking-progress {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    .progress-step span {
+        font-size: 5px;
+    }
+
+    .selected-card {
+        padding: 14px;
+    }
+
+    .selected-heading h2 {
+        font-size: 14px;
+    }
+
+}

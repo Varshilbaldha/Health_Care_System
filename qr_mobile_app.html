@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Care Your Health - Download App For Mobile </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }   
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+
+            background: #f4f8fb;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 420px;
+
+            background: white;
+
+            padding: 30px 20px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #2563eb;
+
+            color: white;
+
+            border-radius: 16px;
+
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin: 10px 0;
+
+            color: #1f2937;
+
+            font-size: 28px;
+        }
+
+        .description {
+            color: #6b7280;
+
+            line-height: 1.5;
+
+            margin-bottom: 20px;
+        }
+
+        /* QR CODE */
+
+        .qr-code {
+            width: 280px;
+            max-width: 80%;
+
+            margin: 15px auto;
+
+            display: block;
+
+            border: 8px solid white;
+
+            border-radius: 8px;
+
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.10);
+        }
+
+        /* DOWNLOAD BUTTON */
+
+        .download-btn {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 14px 28px;
+
+            background: #2563eb;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .download-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .info {
+            margin-top: 20px;
+
+            font-size: 13px;
+
+            color: #6b7280;
+
+            line-height: 1.5;
+        }
+
+        .server {
+            margin-top: 10px;
+
+            padding: 10px;
+
+            background: #f1f5f9;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+
+            word-break: break-all;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        CH
+    </div>
+
+    <h1>
+        Care Your Health
+    </h1>
+
+    <p class="description">
+        Scan the QR code below to download
+        the Care Your Health Android application.
+    </p>
+
+
+    <!-- QR CODE -->
+
+    <img
+        class="qr-code"
+        src="qr_mobile.png"
+        alt="Care Your Health QR Code"
+    >
+
+
+    <!-- DOWNLOAD BUTTON -->
+
+    <a
+        class="download-btn"
+        href="CareYourHealth.apk"
+        download
+    >
+        Download App
+    </a>
+
+
+    <div class="info">
+
+    
+
+    </div>
+
+
+    <div class="server">
+
+        Download URL:<br>
+
+        http://10.201.107.110/Hospital_Management_System/CareYourHealth.apk
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,380 @@
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#23042f,#1d1f3d,#103f52);
+    overflow:hidden;
+    position:relative;
+}
+
+/* Background Glow */
+
+body::before{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    background:#1ee6c1;
+    border-radius:50%;
+    filter:blur(180px);
+    top:-180px;
+    left:-180px;
+    opacity:.20;
+}
+
+body::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    background:#00b7ff;
+    border-radius:50%;
+    filter:blur(180px);
+    bottom:-150px;
+    right:-150px;
+    opacity:.18;
+}
+
+/* Main */
+
+.main{
+    width:450px;
+}
+
+/* Login Card */
+
+.box{
+
+    background:rgba(110,255,220,.20);
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    padding:45px;
+
+    border-radius:8px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+}
+
+/* Heading */
+
+.box h2{
+
+    color:white;
+
+    font-size:34px;
+
+    letter-spacing:2px;
+
+    font-weight:500;
+
+    margin-bottom:25px;
+
+}
+
+/* Labels */
+
+.box h3{
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:400;
+
+}
+
+/* Inputs */
+
+.input{
+
+    width:100%;
+
+    height:50px;
+
+    margin-top:12px;
+
+    margin-bottom:18px;
+
+    padding-left:18px;
+
+    background:#24363b;
+
+    border:none;
+
+    outline:none;
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+.input::placeholder{
+
+    color:#b9c3c6;
+
+}
+
+.input:focus{
+
+    border:1px solid #2de0c3;
+
+}
+
+/* Login Button */
+
+.login input{
+
+    width:100%;
+
+    height:50px;
+
+    border:none;
+
+    background:white;
+
+    color:#374151;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.login input:hover{
+
+    background:#2de0c3;
+
+    color:white;
+
+}
+
+/* Register */
+
+.new-register{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:white;
+
+}
+
+.new-register a{
+
+    color:#7effdd;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.new-register a:hover{
+
+    color:white;
+
+}
+
+/* Error */
+
+#msg,
+#msg1{
+
+    color:#ff7d7d;
+
+    font-size:13px;
+
+}
+
+/* Information Card */
+
+.info-card{
+
+    position:absolute;
+
+    right:70px;
+
+    width:420px;
+
+    padding:35px;
+
+    color:white;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:10px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+}
+
+.eyebrow{
+
+    display:inline-block;
+
+    background:#2de0c3;
+
+    color:#183b42;
+
+    padding:8px 18px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.info-title{
+
+    margin:20px 0;
+
+    font-size:28px;
+
+}
+
+.info-desc{
+
+    line-height:28px;
+
+    color:#d9d9d9;
+
+}
+
+.info-list{
+
+    margin-top:25px;
+
+    list-style:none;
+
+}
+
+.info-list li{
+
+    display:flex;
+
+    gap:15px;
+
+    margin:18px 0;
+
+    align-items:center;
+
+}
+
+.info-list i{
+
+    color:#2de0c3;
+
+    font-size:20px;
+
+}
+
+/* Responsive */
+
+@media(max-width:1100px){
+
+body{
+
+padding:40px;
+
+}
+
+.main{
+
+width:100%;
+
+}
+
+.info-card{
+
+display:none;
+
+}
+
+.box{
+
+width:100%;
+
+}
+
+}
+.shape{
+    position:absolute;
+    opacity:.25;
+    clip-path:polygon(50% 0%,100% 100%,0% 100%);
+    animation:float 8s ease-in-out infinite;
+}
+
+.s1{
+    width:180px;
+    height:180px;
+    background:#29ffd8;
+    left:-40px;
+    bottom:30px;
+}
+
+.s2{
+    width:140px;
+    height:140px;
+    background:#00ffd0;
+    right:40px;
+    top:80px;
+}
+
+.s3{
+    width:120px;
+    height:120px;
+    background:#3de0ff;
+    right:220px;
+    bottom:80px;
+}
+
+.s4{
+    width:100px;
+    height:100px;
+    background:#29ffd8;
+    left:100px;
+    top:120px;
+}
+
+.s5{
+    width:160px;
+    height:160px;
+    background:#00c8ff;
+    right:-30px;
+    bottom:180px;
+}
+
+@keyframes float{
+
+0%,100%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-25px);
+}
+
+}

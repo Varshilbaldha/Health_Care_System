@@ -1,0 +1,451 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f7fc;
+
+    color: #172033;
+}
+
+.mobile-app {
+    width: 100%;
+    max-width: 480px;
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    padding-bottom: 90px;
+}
+
+
+/*==================================================
+    HEADER
+==================================================*/
+
+.profile-header {
+    padding: 20px 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111936,
+            #6355f4
+        );
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.back-button {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,.14);
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-decoration: none;
+
+    font-size: 23px;
+}
+
+.profile-header span {
+    display: block;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    opacity: .7;
+
+    margin-bottom: 4px;
+}
+
+.profile-header h1 {
+    margin: 0;
+
+    font-size: 22px;
+}
+
+
+/*==================================================
+    PROFILE HERO
+==================================================*/
+
+.profile-card {
+    margin: 15px;
+
+    padding: 25px 18px;
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    box-shadow:
+        0 7px 25px
+        rgba(31,48,85,.07);
+}
+
+.profile-avatar {
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6355f4,
+            #8177ff
+        );
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 20px
+        rgba(99,91,255,.22);
+}
+
+.profile-card h2 {
+    margin: 0 0 5px;
+
+    font-size: 20px;
+}
+
+.profile-card p {
+    margin: 0;
+
+    color: #8b94a5;
+
+    font-size: 12px;
+}
+
+.patient-id {
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    background: #f0efff;
+
+    color: #6355f4;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+/*==================================================
+    SECTION
+==================================================*/
+
+.section {
+    padding: 0 15px;
+
+    margin-bottom: 22px;
+}
+
+.section-title {
+    margin: 0 0 11px;
+
+    font-size: 17px;
+}
+
+
+/*==================================================
+    INFORMATION
+==================================================*/
+
+.info-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.info-item {
+    padding: 13px;
+
+    background: #ffffff;
+
+    border: 1px solid #edf0f5;
+
+    border-radius: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+.info-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: #f0f1ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 17px;
+}
+
+.info-item span {
+    display: block;
+
+    color: #9098a9;
+
+    font-size: 9px;
+
+    margin-bottom: 4px;
+}
+
+.info-item strong {
+    display: block;
+
+    color: #293248;
+
+    font-size: 12px;
+
+    word-break: break-word;
+}
+
+
+/*==================================================
+    OPTIONS
+==================================================*/
+
+.options {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.option {
+    padding: 13px;
+
+    background: #ffffff;
+
+    border: 1px solid #edf0f5;
+
+    border-radius: 16px;
+
+    display: grid;
+
+    grid-template-columns:
+        40px 1fr auto;
+
+    align-items: center;
+
+    gap: 11px;
+
+    text-decoration: none;
+
+    color: #172033;
+}
+
+.option-icon {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 12px;
+
+    background: #eef0ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.option strong {
+    display: block;
+
+    font-size: 12px;
+
+    margin-bottom: 4px;
+}
+
+.option small {
+    display: block;
+
+    font-size: 9px;
+
+    color: #8b94a5;
+}
+
+.option b {
+    color: #9aa2b1;
+
+    font-size: 18px;
+}
+
+
+/*==================================================
+    LOGOUT
+==================================================*/
+
+.logout-section {
+    padding: 0 15px;
+
+    margin-bottom: 20px;
+
+    color: #000;
+}
+span
+{
+    color: black;
+}
+
+.logout-section form {
+    margin: 0;
+    color: black;
+}
+
+.logout-button {
+    width: 100%;
+
+    color:black;
+    padding: 13px;
+
+    border: 1px solid ;
+    border-color: #111936;
+
+    border-radius: 15px;
+
+    background: #fff5f5;
+
+    
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+}
+
+
+/*==================================================
+    BOTTOM NAV
+==================================================*/
+
+.bottom-nav {
+    position: fixed;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    width: 100%;
+    max-width: 480px;
+
+    height: 70px;
+
+    background: #ffffff;
+
+    border-top:
+        1px solid #e8ebf2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    z-index: 1000;
+
+    box-shadow:
+        0 -5px 20px
+        rgba(31,48,85,.07);
+}
+
+.bottom-nav a {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    color: #8c94a5;
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+.bottom-nav a span {
+    font-size: 18px;
+}
+
+.bottom-nav a.active {
+    color: #6355f4;
+}

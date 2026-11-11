@@ -1,0 +1,354 @@
+
+/* =========================================================
+   CARE YOUR HEALTH - SHARED ADMIN UI
+   Loaded after page-specific styles so every admin module
+   keeps its existing structure while sharing one visual system.
+   No functional selectors are changed here.
+========================================================= */
+
+:root{
+    --ui-primary:#6c63ff;
+    --ui-primary-dark:#574bdb;
+    --ui-text:#172033;
+    --ui-muted:#667085;
+    --ui-soft:#f6f8fc;
+    --ui-border:#e7ebf2;
+    --ui-white:#ffffff;
+    --ui-success:#16a34a;
+    --ui-danger:#dc2626;
+    --ui-warning:#d97706;
+    --ui-shadow:0 8px 26px rgba(20,30,70,.07);
+    --ui-radius:14px;
+}
+
+html{scroll-behavior:smooth}
+body{
+    background:#f5f7fb;
+    color:var(--ui-text);
+}
+.dashboard{background:#f5f7fb}
+.dashboard > .main-content,
+.main-content{
+    background:#f5f7fb;
+}
+
+/* ---------- Page header ---------- */
+.main-content .page-header{
+    min-height:54px;
+    margin-bottom:24px;
+}
+.main-content .page-header h1{
+    color:var(--ui-text);
+    font-weight:750;
+    letter-spacing:-.02em;
+}
+.main-content .page-header p{
+    color:var(--ui-muted);
+}
+
+/* ---------- Primary buttons ---------- */
+.main-content .add-btn,
+.main-content .primary-btn,
+.main-content .save-btn,
+.main-content .filter-btn{
+    background:linear-gradient(135deg,#746bff 0%,#6357ef 100%);
+    color:#fff;
+    border:0;
+    border-radius:10px;
+    box-shadow:0 7px 18px rgba(108,99,255,.18);
+    transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+}
+.main-content .add-btn:hover,
+.main-content .primary-btn:hover,
+.main-content .save-btn:hover,
+.main-content .filter-btn:hover{
+    background:linear-gradient(135deg,#6c63ff 0%,#574bdb 100%);
+    transform:translateY(-1px);
+    box-shadow:0 10px 22px rgba(108,99,255,.22);
+}
+
+/* ---------- Stats ---------- */
+.main-content .stats-container,
+.main-content .stats-grid,
+.main-content .stats-row{
+    gap:16px;
+}
+.main-content .stat-card,
+.main-content .mini-stat{
+    background:#fff;
+    border:1px solid var(--ui-border);
+    border-radius:16px;
+    box-shadow:var(--ui-shadow);
+    transition:transform .18s ease,box-shadow .18s ease;
+}
+.main-content .stat-card:hover,
+.main-content .mini-stat:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(20,30,70,.09);
+}
+
+/* ---------- Toolbars / filters ---------- */
+.main-content .toolbar,
+.main-content .department-toolbar,
+.main-content .module-toolbar{
+    background:#fff;
+    border:1px solid var(--ui-border);
+    border-radius:14px;
+    box-shadow:var(--ui-shadow);
+}
+.main-content .search-box,
+.main-content .search-wrap,
+.main-content .filter-box,
+.main-content .patient-search-box,
+.main-content .patient-filter-box{
+    background:#f9fafc;
+    border-color:#e2e7ef;
+    border-radius:10px;
+}
+.main-content input:not([type="checkbox"]):not([type="radio"]),
+.main-content select,
+.main-content textarea{
+    color:#273043;
+}
+.main-content input:not([type="checkbox"]):not([type="radio"]):focus,
+.main-content select:focus,
+.main-content textarea:focus{
+    border-color:#b8b2ff;
+    box-shadow:0 0 0 3px rgba(108,99,255,.08);
+}
+
+/* ---------- Tables: one shared visual language ---------- */
+.main-content .table-container,
+.main-content .table-card,
+.main-content .department-table,
+.main-content .table-responsive,
+.main-content .data-table-card{
+    background:#fff;
+    border:1px solid var(--ui-border);
+    border-radius:16px;
+    box-shadow:var(--ui-shadow);
+    overflow:hidden;
+}
+.main-content .table-container table,
+.main-content .table-card table,
+.main-content .department-table table,
+.main-content .table-responsive table{
+    border-collapse:separate;
+    border-spacing:0;
+}
+.main-content .table-container thead,
+.main-content .table-card thead,
+.main-content .department-table thead,
+.main-content .table-responsive thead{
+    background:#f8fafc;
+}
+.main-content .table-container th,
+.main-content .table-card th,
+.main-content .department-table th,
+.main-content .table-responsive th{
+    background:#f8fafc;
+    color:#667085;
+    font-size:12px;
+    font-weight:750;
+    text-transform:none;
+    letter-spacing:.01em;
+    border-bottom:1px solid #e9edf3;
+    padding:14px 16px;
+    white-space:nowrap;
+}
+.main-content .table-container td,
+.main-content .table-card td,
+.main-content .department-table td,
+.main-content .table-responsive td{
+    background:#fff;
+    color:#344054;
+    border-bottom:1px solid #eef1f5;
+    padding:14px 16px;
+    font-size:13px;
+    vertical-align:middle;
+}
+.main-content .table-container tbody tr:last-child td,
+.main-content .table-card tbody tr:last-child td,
+.main-content .department-table tbody tr:last-child td,
+.main-content .table-responsive tbody tr:last-child td{
+    border-bottom:0;
+}
+.main-content .table-container tbody tr:hover td,
+.main-content .table-card tbody tr:hover td,
+.main-content .department-table tbody tr:hover td,
+.main-content .table-responsive tbody tr:hover td{
+    background:#fafaff;
+}
+
+/* ---------- Status / type pills ---------- */
+.main-content .status,
+.main-content .status-pill,
+.main-content .type{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:26px;
+    padding:5px 10px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:750;
+    line-height:1;
+}
+.main-content .status.active,
+.main-content .status.scheduled,
+.main-content .status.completed,
+.main-content .status.paid,
+.main-content .status.registered{
+    background:#ecfdf3;
+    color:#15803d;
+}
+.main-content .status.cancelled,
+.main-content .status.inactive,
+.main-content .status.no-show,
+.main-content .status.discharged{
+    background:#fef2f2;
+    color:#b42318;
+}
+.main-content .status.checked-in,
+.main-content .status.in-progress,
+.main-content .status.pending,
+.main-content .status.partially-paid{
+    background:#fff7ed;
+    color:#c2410c;
+}
+
+/* ---------- Actions ---------- */
+.main-content .action-btn,
+.main-content .doctor-action-btn,
+.main-content .patient-action-btn,
+.main-content .icon-btn,
+.main-content .service-actions button,
+.main-content .action-buttons button{
+    border-radius:9px;
+    transition:background .16s ease,color .16s ease,border-color .16s ease,transform .16s ease;
+}
+.main-content .action-btn:hover,
+.main-content .doctor-action-btn:hover,
+.main-content .patient-action-btn:hover,
+.main-content .icon-btn:hover{
+    transform:translateY(-1px);
+}
+
+/* ---------- Pagination ---------- */
+.main-content .pagination{
+    gap:7px;
+}
+.main-content .page-btn{
+    min-width:38px;
+    height:38px;
+    border-radius:9px;
+    border:1px solid #e2e7ef;
+    background:#fff;
+    color:#475467;
+}
+.main-content .page-btn.active,
+.main-content .page-btn:hover{
+    background:var(--ui-primary);
+    border-color:var(--ui-primary);
+    color:#fff;
+}
+
+/* ---------- Forms / modals ---------- */
+.main-content .modal,
+.main-content .modal-overlay,
+.main-content .module-modal{
+    backdrop-filter:blur(2px);
+}
+.main-content .modal-content,
+.main-content .doctor-modal,
+.main-content .patient-modal,
+.main-content .modal-card{
+    background:#fff;
+    border:1px solid #e5e9f1;
+    border-radius:18px;
+    box-shadow:0 24px 70px rgba(15,23,42,.18);
+}
+.main-content .modal-header,
+.main-content .modal-title{
+    border-bottom-color:#edf0f5;
+}
+.main-content .form-group label{
+    color:#344054;
+    font-weight:650;
+}
+.main-content .form-group input,
+.main-content .form-group select,
+.main-content .form-group textarea{
+    border-color:#dfe5ee;
+    border-radius:10px;
+    background:#fff;
+}
+.main-content .cancel-btn,
+.main-content .cancel-edit-btn,
+.main-content .cancel-delete-btn{
+    border-radius:10px;
+}
+
+/* ---------- Messages ---------- */
+.main-content .success-message,
+.main-content .error-message,
+.main-content .page-message{
+    border-radius:12px;
+    box-shadow:0 3px 12px rgba(20,30,70,.03);
+}
+
+/* ---------- Responsive table handling ---------- */
+@media(max-width:900px){
+    .main-content{padding:24px 18px}
+    .main-content .table-container,
+    .main-content .table-card,
+    .main-content .department-table{
+        overflow-x:auto;
+    }
+}
+@media(max-width:600px){
+    .main-content{padding:18px 14px}
+    .main-content .page-header{
+        gap:14px;
+    }
+}
+
+/* =========================================================
+   SHARED RESET / CLEAR FILTER BUTTON
+   Same UI on every admin listing page.
+========================================================= */
+.main-content .reset-btn,
+.main-content .patient-reset-btn{
+    min-width:88px;
+    height:42px;
+    padding:0 16px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    box-sizing:border-box;
+    border:1px solid #e1e5ee;
+    border-radius:10px;
+    background:#fff;
+    color:#596273;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:650;
+    line-height:1;
+    cursor:pointer;
+    transition:all .18s ease;
+    white-space:nowrap;
+}
+.main-content .reset-btn:hover,
+.main-content .patient-reset-btn:hover{
+    background:#f5f3ff;
+    border-color:#c9c4ff;
+    color:#5b50e8;
+    text-decoration:none;
+    transform:translateY(-1px);
+    box-shadow:0 5px 14px rgba(108,99,255,.10);
+}
+.main-content .reset-btn:active,
+.main-content .patient-reset-btn:active{
+    transform:translateY(0);
+}

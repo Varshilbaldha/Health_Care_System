@@ -1,0 +1,185 @@
+/* =========================================================
+   MOBILE COMMON UI  -  one look for every mobile page
+   Linked LAST in every mobile page so it unifies:
+   font, colours, page width, header, back button, buttons,
+   inputs, cards, messages and the bottom navigation.
+   Change the tokens below to restyle the whole mobile app.
+   ========================================================= */
+
+:root {
+    --m-primary: #6355f4;
+    --m-primary-dark: #5143e8;
+    --m-navy: #111936;
+    --m-bg: #f4f7fc;
+    --m-card: #ffffff;
+    --m-text: #172033;
+    --m-muted: #64748b;
+    --m-border: #e8ebf2;
+    --m-danger: #c92c2c;
+    --m-radius: 18px;
+    --m-radius-sm: 13px;
+    --m-shadow: 0 8px 22px rgba(31, 48, 85, .07);
+    --m-width: 480px;
+    --m-nav-h: 70px;
+}
+
+/* ---------- base ---------- */
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--m-bg);
+    color: var(--m-text);
+    margin: 0;
+}
+
+button, input, select, textarea { font-family: inherit; }
+
+a { -webkit-tap-highlight-color: transparent; }
+
+/* ---------- page width: always one phone-width column ---------- */
+.mobile-app,
+.mobile-page,
+.mobile-header-inner,
+.patient-dashboard-content,
+.dashboard-content,
+.notification-content,
+.ai-container,
+.patient-header-container,
+.patient-footer-container {
+    width: 100%;
+    max-width: var(--m-width);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+.mobile-app { background: var(--m-bg); min-height: 100vh; padding-bottom: calc(var(--m-nav-h) + 20px); }
+.patient-dashboard-content { padding: 18px 16px 90px; }
+
+/* ---------- header (same on every page) ---------- */
+.app-header,
+.page-header,
+.mobile-header,
+.patient-header {
+    background: linear-gradient(135deg, var(--m-navy), var(--m-primary));
+    color: #ffffff;
+    border-radius: 0 0 28px 28px;
+    box-shadow: 0 6px 18px rgba(99, 85, 244, .18);
+}
+
+.mobile-header { position: sticky; top: 0; z-index: 50; }
+.mobile-header h1, .mobile-header h2, .mobile-header p, .mobile-header span,
+.app-header h1, .app-header h2, .app-header p,
+.page-header h1, .page-header h2, .page-header p,
+.header-title, .small-title, .header-small { color: #ffffff; }
+
+.patient-header { position: sticky; top: 0; z-index: 50; padding: 16px 0; }
+.patient-header-container { display: flex; align-items: center; justify-content: space-between; padding: 0 18px; gap: 12px; }
+.patient-logo a { color: #ffffff; text-decoration: none; font-weight: 700; font-size: 17px; }
+.patient-header-right { display: flex; align-items: center; gap: 10px; }
+.patient-welcome { font-size: 12px; opacity: .85; max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.logout-button {
+    color: #ffffff; text-decoration: none; font-size: 12px; font-weight: 700;
+    padding: 7px 12px; border-radius: 11px; background: rgba(255, 255, 255, .16);
+}
+.patient-footer { text-align: center; font-size: 11px; color: var(--m-muted); padding: 18px 16px 90px; }
+
+/* ---------- back button ---------- */
+.back-button, .back-btn {
+    width: 40px; height: 40px; flex: 0 0 auto;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 0; border-radius: var(--m-radius-sm);
+    background: rgba(255, 255, 255, .16);
+    color: #ffffff; text-decoration: none; font-size: 18px; cursor: pointer;
+}
+
+/* ---------- buttons ---------- */
+.primary-button, .continue-button, .select-button, .btn-primary, button[type="submit"].submit-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 48px; padding: 0 18px;
+    border: 0; border-radius: var(--m-radius-sm);
+    background: linear-gradient(135deg, var(--m-primary), var(--m-primary-dark));
+    color: #ffffff; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer;
+    box-shadow: 0 8px 18px rgba(99, 85, 244, .25);
+}
+.primary-button:active, .continue-button:active, .select-button:active { transform: scale(.98); }
+
+/* ---------- form fields ---------- */
+.form-group label { font-size: 13px; font-weight: 700; color: var(--m-text); }
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"],
+input[type="number"], input[type="date"], input[type="time"], input[type="search"],
+select, textarea {
+    box-sizing: border-box;
+    border: 1px solid var(--m-border);
+    border-radius: var(--m-radius-sm);
+    background: #ffffff;
+    color: var(--m-text);
+    font-size: 15px;
+}
+input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--m-primary);
+    box-shadow: 0 0 0 3px rgba(99, 85, 244, .14);
+}
+
+/* ---------- cards ---------- */
+.appointment-card, .department-card, .quick-card, .ai-card, .empty-card, .empty-box,
+.hospital-card, .doctor-card, .notification-card, .profile-card {
+    background: var(--m-card);
+    border: 1px solid var(--m-border);
+    border-radius: var(--m-radius);
+    box-shadow: var(--m-shadow);
+}
+
+.section-title, .section-header h2, .section-header h3 { color: var(--m-text); font-weight: 700; }
+
+/* ---------- messages ---------- */
+.error-message, .error-box {
+    background: #fff1f1; color: var(--m-danger);
+    border: 1px solid #f6caca; border-radius: var(--m-radius-sm);
+}
+
+.count-badge { background: #eeedff; color: var(--m-primary); }
+
+/* ---------- bottom navigation (one bar for every page) ---------- */
+.bottom-nav, .bottom-navigation {
+    position: fixed; left: 50%; right: auto; bottom: 0;
+    transform: translateX(-50%);
+    width: 100%; max-width: var(--m-width); height: var(--m-nav-h);
+    padding: 0 0 env(safe-area-inset-bottom);
+    box-sizing: content-box;
+    display: grid; grid-template-columns: repeat(5, 1fr); align-items: stretch;
+    background: rgba(255, 255, 255, .98);
+    border-top: 1px solid var(--m-border);
+    box-shadow: 0 -5px 20px rgba(31, 48, 85, .07);
+    z-index: 1000;
+}
+.bottom-navigation .nav-link {
+    position: relative; width: auto; height: var(--m-nav-h);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    color: #8c94a5; text-decoration: none;
+}
+.bottom-navigation .nav-link svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.bottom-navigation .nav-link small { font-size: 10px; font-weight: 600; }
+.bottom-navigation .nav-link.active { color: var(--m-primary); }
+.bottom-navigation .nav-link.active::after {
+    content: ""; position: absolute; bottom: 6px; width: 4px; height: 4px; border-radius: 50%; background: var(--m-primary);
+}
+.bottom-navigation .nav-link.book-link svg { stroke-width: 2.2; }
+
+@media (min-width: 481px) {
+    body { background: #e9eef7; }
+    .mobile-app { box-shadow: 0 0 40px rgba(31, 48, 85, .10); }
+}
+
+/* Book (+) button in the bottom bar */
+.bottom-navigation .book-link { justify-content: center; gap: 3px; }
+.bottom-navigation .book-button {
+    width: 45px; height: 45px; margin-top: -20px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 14px; border: 4px solid #ffffff;
+    color: #ffffff; font-size: 25px; font-weight: 400;
+    background: linear-gradient(135deg, var(--m-primary-dark), var(--m-primary));
+    box-shadow: 0 8px 18px rgba(99, 85, 244, .30);
+}
+.bottom-navigation .book-link small { margin-top: -1px; color: var(--m-primary); }

@@ -1,0 +1,1471 @@
+<?php
+
+declare(strict_types=1);
+require_once __DIR__ . '/../config/database.php';
+
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+
+
+/*
+|--------------------------------------------------------------------------
+| SELECT DEPARTMENT
+|--------------------------------------------------------------------------
+| Mobile Appointment Booking - Step 3
+|--------------------------------------------------------------------------
+|
+| Previous:
+| select_hospital.php
+|
+| Current:
+| select_department.php
+|
+| Next:
+| select_doctor.php
+|
+|--------------------------------------------------------------------------
+*/
+
+
+/*====================================================
+    PATIENT AUTHENTICATION
+====================================================*/
+
+require_once __DIR__ .
+    '/../patient_portal/includes/auth_check.php';
+
+
+/*====================================================
+    PAGE TITLE
+====================================================*/
+
+$page_title = "Select Department";
+
+
+/*====================================================
+    CHECK APPOINTMENT SESSION
+====================================================*/
+
+if (
+    !isset($_SESSION['appointment_booking'])
+    ||
+    !is_array($_SESSION['appointment_booking'])
+) {
+
+    $_SESSION['error'] =
+        "Please select a hospital first.";
+
+    header("Location: book.php");
+    exit;
+}
+
+
+/*====================================================
+    GET BOOKING SESSION
+====================================================*/
+
+$booking =
+    $_SESSION['appointment_booking'];
+
+
+/*====================================================
+    BOOKING DATA
+====================================================*/
+
+$account_id =
+    (int) (
+        $booking['account_id']
+        ?? 0
+    );
+
+
+$mapping_id =
+    (int) (
+        $booking['mapping_id']
+        ?? 0
+    );
+
+
+$hospital_id =
+    (int) (
+        $booking['hospital_id']
+        ?? 0
+    );
+
+
+$hospital_name =
+    trim(
+        (string) (
+            $booking['hospital_name']
+            ?? ''
+        )
+    );
+
+
+$hospital_patient_code =
+    trim(
+        (string) (
+            $booking['hospital_patient_code']
+            ?? ''
+        )
+    );
+
+
+$city =
+    trim(
+        (string) (
+            $booking['city']
+            ?? ''
+        )
+    );
+
+
+$state =
+    trim(
+        (string) (
+            $booking['state']
+            ?? ''
+        )
+    );
+
+
+$hospital_database =
+    trim(
+        (string) (
+            $booking['database_name']
+            ?? ''
+        )
+    );
+
+
+/*===================================================
+    VALIDATE BOOKING SESSION
+====================================================*/
+
+if (
+    $account_id <= 0
+    ||
+    $mapping_id <= 0
+    ||
+    $hospital_id <= 0
+    ||
+    $hospital_database === ''
+) {
+
+    unset(
+        $_SESSION['appointment_booking']
+    );
+
+    $_SESSION['error'] =
+        "Invalid appointment booking session.";
+
+    header("Location: book.php");
+    exit;
+}
+
+
+/*====================================================
+    VALIDATE DATABASE NAME
+====================================================*/
+
+if (
+    !preg_match(
+        '/^[A-Za-z0-9_]+$/',
+        $hospital_database
+    )
+) {
+
+    unset(
+        $_SESSION['appointment_booking']
+    );
+
+    $_SESSION['error'] =
+        "Invalid hospital database configuration.";
+
+    header("Location: book.php");
+    exit;
+}
+
+
+/*====================================================
+    CONNECT TO HOSPITAL DATABASE
+====================================================*/
+
+$hospital_conn =
+    db_connect($hospital_database);
+
+
+if (!$hospital_conn) {
+
+    $_SESSION['error'] =
+        "Unable to connect to the selected hospital database.";
+
+    header("Location: book.php");
+    exit;
+}
+
+
+mysqli_set_charset(
+    $hospital_conn,
+    "utf8mb4"
+);
+
+
+/*====================================================
+    GET ACTIVE DEPARTMENTS
+====================================================*/
+
+/*
+    IMPORTANT:
+
+    Your departments table has:
+
+    department_id
+    department_name
+    description
+    location
+    head_doctor_id
+    status
+
+    department_code is NOT used.
+*/
+
+$query = "
+
+    SELECT
+
+        department_id,
+        department_name,
+        description,
+        location,
+        head_doctor_id,
+        status
+
+    FROM departments
+
+    WHERE status = 'Active'
+
+    ORDER BY department_name ASC
+
+";
+
+
+$result =
+    mysqli_query(
+        $hospital_conn,
+        $query
+    );
+
+
+if (!$result) {
+
+    $database_error =
+        mysqli_error(
+            $hospital_conn
+        );
+
+    mysqli_close(
+        $hospital_conn
+    );
+
+    die(
+        "Hospital Database Error: " .
+        htmlspecialchars(
+            $database_error,
+            ENT_QUOTES,
+            'UTF-8'
+        )
+    );
+}
+
+
+/*====================================================
+    STORE DEPARTMENTS
+====================================================*/
+
+$departments = [];
+
+
+while (
+    $row =
+    mysqli_fetch_assoc($result)
+) {
+
+    $departments[] = [
+
+        'department_id' =>
+            (int) (
+                $row['department_id']
+                ?? 0
+            ),
+
+        'department_name' =>
+            trim(
+                (string) (
+                    $row['department_name']
+                    ?? ''
+                )
+            ),
+
+        'description' =>
+            trim(
+                (string) (
+                    $row['description']
+                    ?? ''
+                )
+            ),
+
+        'location' =>
+            trim(
+                (string) (
+                    $row['location']
+                    ?? ''
+                )
+            ),
+
+        'status' =>
+            trim(
+                (string) (
+                    $row['status']
+                    ?? ''
+                )
+            )
+
+    ];
+}
+
+
+mysqli_free_result($result);
+
+mysqli_close($hospital_conn);
+
+
+/*====================================================
+    FLASH ERROR
+====================================================*/
+
+$error =
+    (string) (
+        $_SESSION['error']
+        ?? ''
+    );
+
+
+unset(
+    $_SESSION['error']
+);
+
+
+/*====================================================
+    HTML ESCAPE
+====================================================*/
+
+function departmentEscape(
+    string $value
+): string
+{
+    return htmlspecialchars(
+        $value,
+        ENT_QUOTES,
+        'UTF-8'
+    );
+}
+
+?>
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Select Department | Smart Hospital
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f5f8fc;
+
+            color: #1f2937;
+        }
+
+
+        /*================================================
+            TOP HEADER
+        =================================================*/
+
+        .mobile-header {
+
+            width: 100%;
+
+            background: #ffffff;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+            padding:
+                15px 18px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+        }
+
+
+        .mobile-header-inner {
+
+            max-width: 700px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .back-button {
+
+            width: 40px;
+
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            background: #f1f5f9;
+
+            color: #172033;
+
+            font-size: 22px;
+
+            font-weight: bold;
+        }
+
+
+        .header-title {
+
+            flex: 1;
+        }
+
+
+        .header-title h1 {
+
+            margin: 0;
+
+            font-size: 19px;
+
+            color: #111827;
+        }
+
+
+        .header-title p {
+
+            margin: 3px 0 0;
+
+            font-size: 12px;
+
+            color: #6b7280;
+        }
+
+
+        /*================================================
+            PAGE
+        =================================================*/
+
+        .mobile-page {
+
+            width: 100%;
+
+            max-width: 700px;
+
+            margin: auto;
+
+            padding:
+                20px 16px 40px;
+        }
+
+
+        /*================================================
+            INTRO
+        =================================================*/
+
+        .page-intro {
+
+            margin-bottom: 18px;
+        }
+
+
+        .page-intro .small-title {
+
+            margin: 0 0 5px;
+
+            color: #6355f4;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: .7px;
+        }
+
+
+        .page-intro h2 {
+
+            margin: 0;
+
+            font-size: 26px;
+
+            color: #111827;
+        }
+
+
+        .page-intro p {
+
+            margin:
+                7px 0 0;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /*================================================
+            ERROR
+        =================================================*/
+
+        .error-box {
+
+            padding: 13px 15px;
+
+            margin-bottom: 18px;
+
+            border-radius: 12px;
+
+            background: #fef2f2;
+
+            border:
+                1px solid #fecaca;
+
+            color: #b91c1c;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /*================================================
+            HOSPITAL SUMMARY
+        =================================================*/
+
+        .hospital-summary {
+
+            background: #ffffff;
+
+            border-radius: 16px;
+
+            border:
+                1px solid #e5e7eb;
+
+            padding: 17px;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 4px 14px
+                rgba(15, 23, 42, .04);
+        }
+
+
+        .hospital-summary-top {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 13px;
+        }
+
+
+        .hospital-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #eeedff;
+
+            color: #6355f4;
+
+            font-size: 23px;
+
+            font-weight: bold;
+        }
+
+
+        .hospital-summary h3 {
+
+            margin: 0;
+
+            font-size: 17px;
+
+            color: #111827;
+
+            line-height: 1.3;
+        }
+
+
+        .hospital-summary .hospital-location {
+
+            margin: 4px 0 0;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+
+        .hospital-code {
+
+            margin-top: 14px;
+
+            padding-top: 12px;
+
+            border-top:
+                1px solid #eef2f7;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            font-size: 13px;
+        }
+
+
+        .hospital-code span {
+
+            color: #6b7280;
+        }
+
+
+        .hospital-code strong {
+
+            color: #111827;
+        }
+
+
+        /*================================================
+            SECTION HEADER
+        =================================================*/
+
+        .section-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 13px;
+        }
+
+
+        .section-header h2 {
+
+            margin: 0;
+
+            font-size: 19px;
+
+            color: #111827;
+        }
+
+
+        .count-badge {
+
+            padding:
+                6px 10px;
+
+            border-radius: 20px;
+
+            background: #eeedff;
+
+            color: #6355f4;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        /*================================================
+            DEPARTMENT CARD
+        =================================================*/
+
+        .department-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+
+        .department-card {
+
+            background: #ffffff;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 15px;
+
+            padding: 16px;
+
+            box-shadow:
+                0 4px 14px
+                rgba(15, 23, 42, .035);
+
+            transition:
+                .2s ease;
+        }
+
+
+        .department-card:hover {
+
+            border-color: #bfdbfe;
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(15, 23, 42, .07);
+        }
+
+
+        .department-top {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 12px;
+        }
+
+
+        .department-icon {
+
+            width: 44px;
+
+            height: 44px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background: #eeedff;
+
+            color: #6355f4;
+
+            font-size: 20px;
+
+            font-weight: bold;
+        }
+
+
+        .department-info {
+
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .department-info h3 {
+
+            margin: 0;
+
+            font-size: 17px;
+
+            color: #111827;
+        }
+
+
+        .active-status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top: 5px;
+
+            color: #15803d;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        .active-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+        }
+
+
+        .department-description {
+
+            margin:
+                12px 0 0;
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            line-height: 1.55;
+        }
+
+
+        .department-location {
+
+            margin-top: 10px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+
+        .department-location strong {
+
+            color: #374151;
+        }
+
+
+        /*================================================
+            BUTTON
+        =================================================*/
+
+        .department-form {
+
+            margin-top: 14px;
+        }
+
+
+        .select-button {
+
+            width: 100%;
+
+            height: 45px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #6355f4;
+
+            color: #ffffff;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            transition: .2s ease;
+        }
+
+
+        .select-button:hover {
+
+            background: #5143e8;
+        }
+
+
+        .select-button:active {
+
+            transform: scale(.98);
+        }
+
+
+        .select-arrow {
+
+            font-size: 17px;
+        }
+
+
+        /*================================================
+            EMPTY
+        =================================================*/
+
+        .empty-box {
+
+            background: #ffffff;
+
+            border:
+                1px solid #fecaca;
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            color: #b91c1c;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /*================================================
+            MOBILE
+        =================================================*/
+
+        @media (max-width: 480px) {
+
+            .mobile-page {
+
+                padding:
+                    17px 13px 35px;
+            }
+
+
+            .mobile-header {
+
+                padding:
+                    13px;
+            }
+
+
+            .header-title h1 {
+
+                font-size: 17px;
+            }
+
+
+            .page-intro h2 {
+
+                font-size: 23px;
+            }
+
+
+            .hospital-summary {
+
+                padding: 14px;
+            }
+
+
+            .department-card {
+
+                padding: 14px;
+            }
+
+
+            .department-icon {
+
+                width: 40px;
+
+                height: 40px;
+
+                font-size: 18px;
+            }
+
+
+            .department-info h3 {
+
+                font-size: 16px;
+            }
+
+        }
+
+    </style>
+
+<link rel="stylesheet" href="css/common.css">
+</head>
+
+
+<body>
+
+
+    <!--================================================
+        HEADER
+    =================================================-->
+
+    <header class="mobile-header">
+
+        <div class="mobile-header-inner">
+
+            <a
+                href="select_hospital.php"
+                class="back-button"
+                aria-label="Back"
+            >
+
+                ←
+
+            </a>
+
+
+            <div class="header-title">
+
+                <h1>
+                    Book Appointment
+                </h1>
+
+                <p>
+                    Step 3 of appointment booking
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!--================================================
+        PAGE
+    =================================================-->
+
+    <main class="mobile-page">
+
+
+        <!--================================================
+            INTRO
+        =================================================-->
+
+        <div class="page-intro">
+
+            <p class="small-title">
+                Patient Portal
+            </p>
+
+
+            <h2>
+                Select Department
+            </h2>
+
+
+            <p>
+
+                Choose the department where you
+                want to consult the doctor.
+
+            </p>
+
+        </div>
+
+
+        <!--================================================
+            ERROR
+        =================================================-->
+
+        <?php if ($error !== ''): ?>
+
+            <div class="error-box">
+
+                <?= departmentEscape(
+                    $error
+                ); ?>
+
+            </div>
+
+        <?php endif; ?>
+
+
+        <!--================================================
+            HOSPITAL SUMMARY
+        =================================================-->
+
+        <div class="hospital-summary">
+
+
+            <div class="hospital-summary-top">
+
+
+                <div class="hospital-icon">
+
+                    +
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+
+                        <?= departmentEscape(
+                            $hospital_name
+                        ); ?>
+
+                    </h3>
+
+
+                    <?php if (
+                        $city !== ''
+                        ||
+                        $state !== ''
+                    ): ?>
+
+                        <p
+                            class="hospital-location"
+                        >
+
+                            <?= departmentEscape(
+                                $city
+                            ); ?>
+
+
+                            <?php if (
+                                $city !== ''
+                                &&
+                                $state !== ''
+                            ): ?>
+
+                                ,
+
+                            <?php endif; ?>
+
+
+                            <?= departmentEscape(
+                                $state
+                            ); ?>
+
+                        </p>
+
+                    <?php endif; ?>
+
+                </div>
+
+
+            </div>
+
+
+            <?php if (
+                $hospital_patient_code !== ''
+            ): ?>
+
+                <div class="hospital-code">
+
+                    <span>
+                        Patient Code
+                    </span>
+
+
+                    <strong>
+
+                        <?= departmentEscape(
+                            $hospital_patient_code
+                        ); ?>
+
+                    </strong>
+
+                </div>
+
+            <?php endif; ?>
+
+
+        </div>
+
+
+        <!--================================================
+            DEPARTMENT SECTION
+        =================================================-->
+
+        <div class="section-header">
+
+            <h2>
+                Available Departments
+            </h2>
+
+
+            <span class="count-badge">
+
+                <?= count(
+                    $departments
+                ); ?>
+
+                Available
+
+            </span>
+
+        </div>
+
+
+        <!--================================================
+            DEPARTMENT LIST
+        =================================================-->
+
+        <?php if (
+            count($departments) === 0
+        ): ?>
+
+
+            <div class="empty-box">
+
+                No active departments are currently
+                available at this hospital.
+
+            </div>
+
+
+        <?php else: ?>
+
+
+            <div class="department-list">
+
+
+                <?php foreach (
+                    $departments
+                    as $department
+                ): ?>
+
+
+                    <div class="department-card">
+
+
+                        <div class="department-top">
+
+
+                            <div
+                                class="department-icon"
+                            >
+
+                                +
+
+                            </div>
+
+
+                            <div
+                                class="department-info"
+                            >
+
+                                <h3>
+
+                                    <?= departmentEscape(
+                                        $department[
+                                            'department_name'
+                                        ]
+                                    ); ?>
+
+                                </h3>
+
+
+                                <div
+                                    class="active-status"
+                                >
+
+                                    <span
+                                        class="active-dot"
+                                    ></span>
+
+                                    Active
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <?php if (
+                            $department[
+                                'description'
+                            ] !== ''
+                        ): ?>
+
+                            <p
+                                class="department-description"
+                            >
+
+                                <?= departmentEscape(
+                                    $department[
+                                        'description'
+                                    ]
+                                ); ?>
+
+                            </p>
+
+                        <?php else: ?>
+
+                            <p
+                                class="department-description"
+                            >
+
+                                Medical consultation
+                                services are available
+                                in this department.
+
+                            </p>
+
+                        <?php endif; ?>
+
+
+                        <?php if (
+                            $department[
+                                'location'
+                            ] !== ''
+                        ): ?>
+
+                            <div
+                                class="department-location"
+                            >
+
+                                Location:
+
+                                <strong>
+
+                                    <?= departmentEscape(
+                                        $department[
+                                            'location'
+                                        ]
+                                    ); ?>
+
+                                </strong>
+
+                            </div>
+
+                        <?php endif; ?>
+
+
+                        <!--================================
+                            SELECT DEPARTMENT
+                        =================================-->
+
+                        <form
+                            method="POST"
+                            action="select_doctor.php"
+                            class="department-form"
+                        >
+
+                            <input
+                                type="hidden"
+                                name="department_id"
+                                value="<?= (int)
+                                    $department[
+                                        'department_id'
+                                    ]; ?>"
+                            >
+
+
+                            <button
+                                type="submit"
+                                class="select-button"
+                            >
+
+                                Select Department
+
+                                <span
+                                    class="select-arrow"
+                                >
+                                    →
+                                </span>
+
+                            </button>
+
+                        </form>
+
+
+                    </div>
+
+
+                <?php endforeach; ?>
+
+
+            </div>
+
+
+        <?php endif; ?>
+
+
+    </main>
+
+
+</body>
+
+</html>
